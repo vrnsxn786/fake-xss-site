@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fake Company</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+    h1 { color: #333; }
+    input[type="text"] { padding: 8px; width: 300px; }
+    button { padding: 8px 16px; }
+    .result, .contact-result { margin-top: 20px; background: #fff; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
 
+  <h1>Welcome to FakeCompany</h1>
+
+  <h2>Search</h2>
+  <form id="searchForm">
+    <input type="text" id="searchInput" name="q" placeholder="Search...">
+    <button type="submit">Search</button>
+  </form>
+  <div class="result" id="searchResult"></div>
+
+  <hr>
+
+  <h2>Contact Us</h2>
+  <form id="contactForm">
+    <input type="text" id="nameInput" name="name" placeholder="Your name">
+    <button type="submit">Submit</button>
+  </form>
+  <div class="contact-result" id="contactResult"></div>
+
+  <script>
+    // Vulnerable search form
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const query = document.getElementById('searchInput').value;
+      document.getElementById('searchResult').innerHTML = "You searched for: <b>" + query + "</b>";
+    });
+
+    // Vulnerable contact form
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('nameInput').value;
+      document.getElementById('contactResult').innerHTML = "Thank you, " + name + "!";
+    });
+  </script>
+
+</body>
+</html>
